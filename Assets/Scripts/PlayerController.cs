@@ -132,11 +132,11 @@ public class PlayerController : MonoBehaviour
 
 
         // Grounded Detection
+        // Get the location the box should be cast at
         Vector2 boxCenter = (Vector2)transform.position + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
-
-        
-        // Check to see if player is grounded   
+        // Check to see if player is grounded  
         isGrounded = Physics2D.OverlapBox(boxCenter + colliderOffset, boxSize, 0f, groundedMask) != null;
+
 
         if (isGrounded || isAttacking)
         {
@@ -192,6 +192,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Dash()
     {
+        bool leftGround = false;
+
         if (isGrounded && moveDirection != 0)
         {
             float startDirection = moveDirection;
@@ -203,12 +205,18 @@ public class PlayerController : MonoBehaviour
 
             while(!isGrounded ||(Time.time < dashTime && ableToDash && startDirection == moveDirection))
             {
+                if (leftGround && isGrounded)
+                    StopDash();
+
                 // Decrease speed to the original movespeed over time, making dashes smoother
                 float currentDashVelocity = (dashSpeed * moveDirection * ((dashTime - Time.time) * 2));
                 if (currentDashVelocity <= 0 && moveDirection > 0)
                     currentDashVelocity = 0;
                 else if (currentDashVelocity >= 0 && moveDirection < 0)
                     currentDashVelocity = 0;
+
+                if (!isGrounded)
+                    leftGround = true;
 
                 rb2d.velocity = new Vector2(currentDashVelocity + ((moveSpeed + (dashSpeed /2)) * moveDirection), rb2d.velocity.y);
                     
