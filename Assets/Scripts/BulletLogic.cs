@@ -7,6 +7,7 @@ public class BulletLogic : MonoBehaviour
     [SerializeField] string bulletAnim;
     [SerializeField] float speed = 30;
     [SerializeField] LayerMask worldMask;
+    public float damage;
     BoxCollider2D bulletCollider;
 
     void OnEnable()
