@@ -134,8 +134,9 @@ public class PlayerController : MonoBehaviour
         // Grounded Detection
         // Get the location the box should be cast at
         Vector2 boxCenter = (Vector2)transform.position + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
-        // Check to see if player is grounded  
-        isGrounded = Physics2D.OverlapBox(boxCenter + colliderOffset, boxSize, 0f, groundedMask) != null;
+        // Check to see if player is grounded unless travelling upwards  
+        if (rb2d.velocity.y <= 0.1f)
+            isGrounded = Physics2D.OverlapBox(boxCenter + colliderOffset, boxSize, 0f, groundedMask) != null;
 
 
         if (isGrounded || isAttacking)
