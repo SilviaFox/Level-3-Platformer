@@ -3,9 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static void RestartStage()
+    void Start()
     {
         LeanTween.init(2000);
+    }
+    
+    public static void RestartStage()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
