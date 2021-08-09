@@ -7,6 +7,7 @@ TagManager:
   - PlayerProjectile
   - HurtPlayer
   - PlayerHit
+  - World
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Enemies
   - Player
   - Coin
-  - 
+  - WorldObjects
   - 
   - 
   - 
@@ -41,9 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1828935123
+    locked: 0
   - name: BehindPlayer
     uniqueID: 332696205
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Front
+    uniqueID: 2898077279
     locked: 0

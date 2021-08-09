@@ -28,7 +28,6 @@ public class PlayerScore : MonoBehaviour
 
         for (int i = 0; i < value + 1; i+=10)
         {
-            GlobalAudioManager.instance.Play("ScoreCount");
             scoreText.text = (score - value + i).ToString();
             yield return new WaitForFixedUpdate();
         }

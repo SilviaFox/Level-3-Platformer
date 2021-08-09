@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: 3317778521437152790
     second: Charger_11
+  - first:
+      213: -8722370085502162905
+    second: Charger_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -143,9 +146,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 236
-        width: 202
-        height: 118
+        y: 165
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +166,10 @@ TextureImporter:
       name: Charger_1
       rect:
         serializedVersion: 2
-        x: 202
-        y: 236
-        width: 202
-        height: 118
+        x: 96
+        y: 165
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +187,10 @@ TextureImporter:
       name: Charger_2
       rect:
         serializedVersion: 2
-        x: 404
-        y: 236
-        width: 202
-        height: 118
+        x: 192
+        y: 165
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +208,10 @@ TextureImporter:
       name: Charger_3
       rect:
         serializedVersion: 2
-        x: 606
-        y: 236
-        width: 202
-        height: 118
+        x: 288
+        y: 165
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,9 +230,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 118
-        width: 202
-        height: 118
+        y: 110
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +250,10 @@ TextureImporter:
       name: Charger_5
       rect:
         serializedVersion: 2
-        x: 202
-        y: 118
-        width: 202
-        height: 118
+        x: 96
+        y: 110
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +271,10 @@ TextureImporter:
       name: Charger_6
       rect:
         serializedVersion: 2
-        x: 404
-        y: 118
-        width: 202
-        height: 118
+        x: 192
+        y: 110
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +292,10 @@ TextureImporter:
       name: Charger_7
       rect:
         serializedVersion: 2
-        x: 606
-        y: 118
-        width: 202
-        height: 118
+        x: 288
+        y: 110
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,9 +314,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 202
-        height: 118
+        y: 55
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,10 +334,10 @@ TextureImporter:
       name: Charger_9
       rect:
         serializedVersion: 2
-        x: 202
-        y: 0
-        width: 202
-        height: 118
+        x: 96
+        y: 55
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,10 +355,10 @@ TextureImporter:
       name: Charger_10
       rect:
         serializedVersion: 2
-        x: 404
-        y: 0
-        width: 202
-        height: 118
+        x: 192
+        y: 55
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,10 +376,10 @@ TextureImporter:
       name: Charger_11
       rect:
         serializedVersion: 2
-        x: 606
-        y: 0
-        width: 202
-        height: 118
+        x: 288
+        y: 55
+        width: 96
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -386,6 +389,27 @@ TextureImporter:
       bones: []
       spriteID: 616aea5acfd1b0e20800000000000000
       internalID: 3317778521437152790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charger_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 728662ece9ae3f680800000000000000
+      internalID: -8722370085502162905
       vertices: []
       indices: 
       edges: []

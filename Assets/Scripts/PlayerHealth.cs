@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] int maxHealth;
     [SerializeField] Slider healthBar;
-    [HideInInspector] public int visualHealth;
+    [HideInInspector] public float visualHealth;
     int health;
     Vector3 healthBarPosition;
 
@@ -47,15 +47,15 @@ public class PlayerHealth : MonoBehaviour
             {
                 healthBar.transform.position += new Vector3(Random.Range(-7,7),Random.Range(-7,7));
 
-                visualHealth --;
+                visualHealth -= 0.5f;
                 healthBar.value = visualHealth;
                 yield return new WaitForEndOfFrame();
             }
 
             healthBar.transform.position = healthBarPosition;
 
-            if (damage <= 0)
-                Debug.Log("die lol");
+            if (health <= 0)
+                GameManager.RestartStage();
         }
     }
 
@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
         while (health != visualHealth)
         {
             
-            visualHealth ++;
+            visualHealth += 0.5f;
 
             healthBar.value = visualHealth;
             yield return new WaitForEndOfFrame();

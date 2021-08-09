@@ -23,6 +23,7 @@ public class EnemyCharger : MonoBehaviour
     [Header("Jump")]
     [SerializeField] float jumpHeight = 10f;
     [SerializeField] float jumpSpeed = 8f;
+    [SerializeField] float jumpVelocityCap = 10;
 
     [Header("Charging")]
     [SerializeField] float chargeBuildupTime = 1f;
@@ -30,11 +31,8 @@ public class EnemyCharger : MonoBehaviour
     [SerializeField] float chargeSpeed = 8f;
 
     [Header("Stun")]
-    [SerializeField] float stunTime = 2f;
+    float stunTime = 0;
     [SerializeField] float rageOnHit = 0.01f;
-
-    [Header("Damage")]
-    [SerializeField] int damage = 10;
 
     float rage;
     bool isCharging = false, isStunned = false;
@@ -56,11 +54,34 @@ public class EnemyCharger : MonoBehaviour
         }
     }
 
+    private void OnBecameInvisible()
+    {        
+        if (activated)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         ghost = GetComponent<Ghost>();
         animator = GetComponent<SpriteAnimator>();
+        UpdateAnimClipTimes();
+    }
+
+    public void UpdateAnimClipTimes()
+    {
+        AnimationClip[] clips = GetComponent<Animator>().runtimeAnimatorController.animationClips;
+        foreach(AnimationClip clip in clips)
+        {
+            switch(clip.name)
+            {
+                case "Enemy_Charger_Stun":
+                    stunTime = clip.length;
+                break;
+            }
+        }
     }
 
     private void Update()
@@ -96,16 +117,22 @@ public class EnemyCharger : MonoBehaviour
         }
     }
 
+    bool CheckFloor()
+    {
+        if (!Physics2D.Raycast(jumpPoint.position, Vector2.down, 0.4f, groundMask) || Physics2D.Raycast(jumpPoint.position, Vector2.right * transform.localScale.x, 3f, groundMask) || Physics2D.Raycast(jumpPoint.position, Vector2.right * transform.localScale.x + Vector2.up, 3f, groundMask))
+            return true;
+
+        return false;
+    }
+
     void Walk()
     {
         animator.ChangeAnimationState("Enemy_Charger_Walk");
         float chargeRage = (float)System.Math.Round(Random.Range(0.1f, 50f), 1);
 
-        transform.localScale = new Vector3(PlayerController.current.transform.position.x > transform.position.x? 1 : -1, 1);
-
         rb2d.velocity = new Vector2(walkSpeed * transform.localScale.x, rb2d.velocity.y);
         
-        if (!Physics2D.Raycast(jumpPoint.position, Vector2.down, 0.5f, groundMask))
+        if (CheckFloor() && rb2d.velocity.y < jumpVelocityCap)
         {
             chargerState = ChargerState.Jumping;
             rb2d.AddForce(new Vector2(jumpSpeed * transform.localScale.x, jumpHeight), ForceMode2D.Impulse);
@@ -121,7 +148,8 @@ public class EnemyCharger : MonoBehaviour
 
     void Jump()
     {
-        if (Physics2D.Raycast(jumpPoint.position, Vector2.down, 0.5f, groundMask))
+        rb2d.velocity = new Vector2(walkSpeed * transform.localScale.x, rb2d.velocity.y);
+        if (Physics2D.Raycast(jumpPoint.position, Vector2.down, 0.4f, groundMask))
         {
             chargerState = ChargerState.Walking;
         }
@@ -140,6 +168,10 @@ public class EnemyCharger : MonoBehaviour
         while (chargeTime > Time.time)
         {
             rb2d.velocity = new Vector2(chargeSpeed * transform.localScale.x, rb2d.velocity.y);
+            if (Physics2D.Raycast(jumpPoint.position, Vector2.down, 0.4f, groundMask) && CheckFloor() && rb2d.velocity.y < jumpVelocityCap)
+            {
+                rb2d.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+            }
             yield return new WaitForEndOfFrame();
         }
 
@@ -156,24 +188,19 @@ public class EnemyCharger : MonoBehaviour
 
         yield return new WaitForSeconds(stunTime);
         isStunned = false;
-        Debug.Log("Stun Trigger");
         chargerState = ChargerState.Charging;
     }
 
     public void OnHit()
     {
-        chargerState = ChargerState.Stunned;
-    }
-
-    // Hurt
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        if (chargerState != ChargerState.Charging)
         {
-            StartCoroutine(PlayerController.health.TakeDamage(damage)); 
+            animator.ChangeAnimationState("Enemy_Charger_Stun", 0, true);
+            chargerState = ChargerState.Stunned;
         }
-
     }
+
+  
 
     public void Die()
     {

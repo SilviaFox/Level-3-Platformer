@@ -102,9 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.7
-  minStartForce: -5
-  maxStartForce: 5
-  moveWaitTime: 1
+  minStartForce: -10
+  maxStartForce: 10
+  minMoveWaitTime: 0.5
+  maxMoveWaitTime: 1.5
   value: 100
 --- !u!50 &1823003677293698932
 Rigidbody2D:
@@ -168,7 +169,7 @@ MonoBehaviour:
   sounds:
   - name: Suck
     clip: {fileID: 8300000, guid: 318aded9fa6cc174db31b5a024fdd6c5, type: 3}
-    volume: 3
+    volume: 0.25
     randomPitch: 0
     minPitch: 1
     maxPitch: 1

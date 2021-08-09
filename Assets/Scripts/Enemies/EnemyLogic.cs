@@ -8,7 +8,9 @@ public class EnemyLogic : MonoBehaviour
     // Player attacks
 
     [SerializeField] float health;
-    [SerializeField] GameObject hitBox;
+    [SerializeField] BoxCollider2D hitBox;
+    [SerializeField] UnityEvent onBecomeVisible;
+    [SerializeField] UnityEvent onBecomeInvisible;
     [SerializeField] UnityEvent onMeleeDamage;
     [SerializeField] UnityEvent onShootDamage;
     [SerializeField] UnityEvent onKill;
@@ -20,6 +22,16 @@ public class EnemyLogic : MonoBehaviour
     {
         if (health == 0)
             invunerable = true;
+    }
+
+    void OnBecameVisible()
+    {
+        onBecomeVisible.Invoke();
+    }
+    
+    void OnBecameInvisible()
+    {
+        onBecomeInvisible.Invoke();
     }
     
     public void TakeMeleeDamage(float damage)
@@ -47,6 +59,11 @@ public class EnemyLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+
+        for (int i = 0; i < coins.Length / (damage > 30? 2 : 4); i++)
+        {
+            Instantiate(coins[i], transform.position, new Quaternion());
+        }
 
         if (health <= 0 && !invunerable)
             StartCoroutine(Kill());
@@ -84,12 +101,12 @@ public class EnemyLogic : MonoBehaviour
 
     public void EnableHitbox()
     {
-        hitBox.SetActive(true);
+        hitBox.enabled = true;
     }
 
     public void DisableHitbox()
     {
-        hitBox.SetActive(false);
+        hitBox.enabled = false;
     }
     
 }

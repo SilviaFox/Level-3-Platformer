@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1632981657598179782, guid: 485810bdff86a9c408507901654c52ae, type: 3}
       propertyPath: speed
-      value: 12
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1632981657598179782, guid: 485810bdff86a9c408507901654c52ae, type: 3}
       propertyPath: damage
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1632981657598179782, guid: 485810bdff86a9c408507901654c52ae, type: 3}
       propertyPath: bulletAnim

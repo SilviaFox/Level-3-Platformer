@@ -68,8 +68,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool allowRebound;
 
     [Header("Physics")]
+    [SerializeField] float groundedForce = 4;
     [SerializeField] PhysicsMaterial2D idlePhysMat;
     [SerializeField] PhysicsMaterial2D movingPhysMat;
+
+    [Header("Game Feel")]
+    [SerializeField] ParticleSystem dustParticles;
 
     // Animation states
     const string PLAYER_RUN = "Player_Run", PLAYER_IDLE = "Player_Idle", PLAYER_SHOOT_IDLE = "Player_Shoot_Idle", PLAYER_DASH = "Player_Dash",
@@ -77,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool isGrounded, isRebounding, ableToDash = true, isDashing, isCharging, isAttacking, isHurt, isInvincible;
 
-    void Start()
+    void Awake()
     {
         current = this;
         health = GetComponent<PlayerHealth>();
@@ -102,6 +106,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        bool groundedThisFrame = isGrounded;
+
         bool wallCheck = Physics2D.Raycast(transform.position - new Vector3(0,0.5f),Vector2.right * transform.localScale.x, 0.55f, groundedMask);
 
         // Change facing scale based on direction
@@ -138,6 +144,11 @@ public class PlayerController : MonoBehaviour
         if (rb2d.velocity.y <= 0.1f)
             isGrounded = Physics2D.OverlapBox(boxCenter + colliderOffset, boxSize, 0f, groundedMask) != null;
 
+        if (isGrounded)
+            rb2d.velocity = new Vector2(rb2d.velocity.x, -groundedForce);
+
+        if (groundedThisFrame != isGrounded)
+            dustParticles.Play();
 
         if (isGrounded || isAttacking)
         {
@@ -171,6 +182,7 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(Vector2.up * (jumpForce - rb2d.velocity.y), ForceMode2D.Impulse); // Walljump if jump button is pressed
             isGrounded = false;
             isAttacking = false;
+            dustParticles.Play();
         }
     }
 
@@ -203,6 +215,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(playerGhost.MakeGhosts());
             audioManager.Play("Dash");
             spriteAnimator.ChangeAnimationState("Player_Dash");
+            dustParticles.Play();
 
             while(!isGrounded ||(Time.time < dashTime && ableToDash && startDirection == moveDirection))
             {
