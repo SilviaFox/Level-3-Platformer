@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
         inputActions.Gameplay.Attack.started += ctx => {
             if(!PlayerController.current.isAttacking) PlayerController.current.StartCoroutine(PlayerController.current.Attack());};
         
-        inputActions.Gameplay.DebugReset.started += ctx => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        inputActions.Gameplay.DebugReset.started += ctx => GameManager.RestartStage();
     }
 
     void Update()

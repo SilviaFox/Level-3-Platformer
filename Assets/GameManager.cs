@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     
     public static void RestartStage()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public static void LoadLevel(string level)
+    {
+        SceneManager.LoadScene(level);
     }
 }

@@ -148,7 +148,11 @@ public class PlayerController : MonoBehaviour
             rb2d.velocity = new Vector2(rb2d.velocity.x, -groundedForce);
 
         if (groundedThisFrame != isGrounded)
+        {
             dustParticles.Play();
+            if (isGrounded)
+                audioManager.Play("Land");
+        }
 
         if (isGrounded || isAttacking)
         {
