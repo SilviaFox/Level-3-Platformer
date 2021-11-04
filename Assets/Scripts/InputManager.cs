@@ -35,10 +35,11 @@ public class InputManager : MonoBehaviour
             };
         inputActions.Gameplay.Shoot.canceled += ctx => PlayerController.current.isCharging = false;
 
-        inputActions.Gameplay.Attack.started += ctx => {
-            if(!PlayerController.current.isAttacking) PlayerController.current.StartCoroutine(PlayerController.current.Attack());};
+        inputActions.Gameplay.Attack.started += ctx => PlayerController.current.StartCoroutine(PlayerController.current.Attack());
         
         inputActions.Gameplay.DebugReset.started += ctx => GameManager.RestartStage();
+
+        inputActions.Gameplay.Pause.started += ctx => GameManager.Pause();
     }
 
     void Update()

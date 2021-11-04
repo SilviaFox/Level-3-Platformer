@@ -61,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 6f22dc112f14f2c40aff56bba89c287f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,12 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   hitBox: {fileID: 1348826189093447901}
-  onBecomeVisible:
-    m_PersistentCalls:
-      m_Calls: []
-  onBecomeInvisible:
-    m_PersistentCalls:
-      m_Calls: []
   onMeleeDamage:
     m_PersistentCalls:
       m_Calls:

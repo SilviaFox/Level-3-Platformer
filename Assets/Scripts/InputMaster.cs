@@ -65,6 +65,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fe2bd4a-ead7-4d4b-a2d0-473888516527"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -232,6 +240,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""DebugReset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53eff456-863b-4a91-84a7-6b3983c4602a"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -246,6 +265,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_DebugReset = m_Gameplay.FindAction("DebugReset", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -301,6 +321,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_DebugReset;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @InputMaster m_Wrapper;
@@ -311,6 +332,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @DebugReset => m_Wrapper.m_Gameplay_DebugReset;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,6 +360,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DebugReset.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugReset;
                 @DebugReset.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugReset;
                 @DebugReset.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugReset;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -360,6 +385,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @DebugReset.started += instance.OnDebugReset;
                 @DebugReset.performed += instance.OnDebugReset;
                 @DebugReset.canceled += instance.OnDebugReset;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -372,5 +400,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDebugReset(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

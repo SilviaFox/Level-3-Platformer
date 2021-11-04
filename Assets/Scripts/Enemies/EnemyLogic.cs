@@ -5,14 +5,13 @@ using UnityEngine.Events;
 
 public class EnemyLogic : MonoBehaviour
 {
-    // Player attacks
 
     [SerializeField] float health;
     [SerializeField] BoxCollider2D hitBox;
-    [SerializeField] UnityEvent onBecomeVisible;
-    [SerializeField] UnityEvent onBecomeInvisible;
+
     [SerializeField] UnityEvent onMeleeDamage;
     [SerializeField] UnityEvent onShootDamage;
+
     [SerializeField] UnityEvent onKill;
     [SerializeField] GameObject[] coins;
     bool invunerable;
@@ -22,16 +21,6 @@ public class EnemyLogic : MonoBehaviour
     {
         if (health == 0)
             invunerable = true;
-    }
-
-    void OnBecameVisible()
-    {
-        onBecomeVisible.Invoke();
-    }
-    
-    void OnBecameInvisible()
-    {
-        onBecomeInvisible.Invoke();
     }
     
     public void TakeMeleeDamage(float damage)
